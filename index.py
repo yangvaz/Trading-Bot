@@ -3,7 +3,7 @@ import time, json
 from datetime import datetime
 from dateutil import tz
 
-API = IQ_Option('login', 'senha')
+API = IQ_Option('email', 'senha') #Insira seu e-mail e senha aqui
 API.connect()
 API.change_balance('PRACTICE') # PRACTICE / REAL
 
