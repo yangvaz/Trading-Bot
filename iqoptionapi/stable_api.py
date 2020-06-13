@@ -1373,7 +1373,7 @@ class IQ_Option:
         active_id = OP_code.ACTIVES[active]
         self.api.Subscribe_Live_Deal(name, active_id, _type)
         """
-        self.api.live_deal_data[name][active][_type]=deque(list(),buffersize) 
+        self.api.live_deal_data[name][active][_type]=deque(list(),buffersize)
 
         while len(self.api.live_deal_data[name][active][_type])==0:
             self.api.Subscribe_Live_Deal(name,active_id,_type)
