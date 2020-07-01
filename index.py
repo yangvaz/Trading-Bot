@@ -65,7 +65,7 @@ for paridade in par ['digital']:    #Mostra as digitais
         print('[ DIGITAL ]: ' +paridade+ ' | Payout: ' +str(payout(paridade, 'digital')))
 
 #Pegando velas em tempo real
-parEur = 'EURUSD'   #Testando com apenas um tipo de moeda
+#parEur = 'EURUSD'   #Testando com apenas um tipo de moeda
 
 #API.start_candles_stream(parEur, 60, 1)
 #time.sleep(1)
@@ -92,8 +92,9 @@ Paridade: instrument_underlying / TURBO: active
 Direção: instrument_dir / TURBO: direction
 Valor: buy_amount
 '''
+print('\n')
 
 for x in historico['positions']: #Para exibir os dados desejados
     print('PAR: ' +str(x['raw_event']['instrument_underlying']) + ' / ' + 'DIRECAO: ' +str(x['raw_event']['instrument_dir']) + ' / VALOR: ' +str(x['invest']))
-    print('LUCRO: ' +str(x['close_profit'] if x['close_profit'] == 0 else round(x['close_profit'] - x['invest'], 2)) + ' | INICIO OP: ' +str(timestamp_converter(x['open_time'] / 1000)) + ' / FIM OP: ' + str(timestamp_converter(x['close_time'] / 1000)))
+    print('RESULTADO: ' +str(x['close_profit']- x['invest'] if x['close_profit'] == 0 else round(x['close_profit'] - x['invest'], 2)) + ' | INICIO OP: ' +str(timestamp_converter(x['open_time'] / 1000)) + ' / FIM OP: ' + str(timestamp_converter(x['close_time'] / 1000)))
     print(' \n')
