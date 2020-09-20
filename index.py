@@ -3,16 +3,16 @@ import time, json
 from datetime import datetime
 from dateutil import tz
 
-API = IQ_Option('email', 'senha') #Insira seu e-mail e senha aqui
+API = IQ_Option('LOGIN', 'SENHA') #Insira seu e-mail e senha aqui
 API.connect()
 API.change_balance('PRACTICE') # PRACTICE / REAL
 
 while True:
     if API.check_connect() == False:
-        print('Erro ao se conectar.')
+        print('Erro ao se conectar. \n')
         API.connect()
     else:
-        print('Conetado com sucesso.')
+        print('Conetado com sucesso. \n')
         break
     time.sleep(1)
 
@@ -77,8 +77,8 @@ for paridade in par ['digital']:    #Mostra as digitais
 #    time.sleep(1)
 #API.stop_candles_stream(parEur, 60)
 
-
-status,historico = API.get_position_history_v2('digital-option', 10, 0, 0, 0) #Alternar para "turbo-option" caso queira exibir binária
+#Puxar histórico de entradas feitas
+status,historico = API.get_position_history_v2('DIGITAL', 10, 0, 0, 0) #Alternar para "turbo-option" caso queira exibir binária
 
 #Algumas sugestões do que se pode pegar
 '''
@@ -93,8 +93,20 @@ Direção: instrument_dir / TURBO: direction
 Valor: buy_amount
 '''
 print('\n')
+#Exibir histórico de entradas e seu resultado
+#for x in historico['positions']: #Para exibir os dados desejados
+    #print('PAR: ' +str(x['raw_event']['instrument_underlying']) + ' / ' + 'DIRECAO: ' +str(x['raw_event']['instrument_dir']) + ' / VALOR: ' +str(x['invest']))
+   # print('RESULTADO: ' +str(x['close_profit']- x['invest'] if x['close_profit'] == 0 else round(x['close_profit'] - x['invest'], 2)) + ' | INICIO OP: ' +str(timestamp_converter(x['open_time'] / 1000)) + ' / FIM OP: ' + str(timestamp_converter(x['close_time'] / 1000)))
+    #print(' \n')
 
-for x in historico['positions']: #Para exibir os dados desejados
-    print('PAR: ' +str(x['raw_event']['instrument_underlying']) + ' / ' + 'DIRECAO: ' +str(x['raw_event']['instrument_dir']) + ' / VALOR: ' +str(x['invest']))
-    print('RESULTADO: ' +str(x['close_profit']- x['invest'] if x['close_profit'] == 0 else round(x['close_profit'] - x['invest'], 2)) + ' | INICIO OP: ' +str(timestamp_converter(x['open_time'] / 1000)) + ' / FIM OP: ' + str(timestamp_converter(x['close_time'] / 1000)))
-    print(' \n')
+par = 'EURUSD-OTC'
+entrada = 2
+direcao = 'call'
+timeframe = 1
+
+status, id = API.buy(entrada, par, direcao, timeframe)
+
+#if status:
+ #   print(API.check_win_v3(id))
+  #  print('\n')
+#print(API.check_win_v4(id))
