@@ -78,7 +78,7 @@ for paridade in par ['digital']:    #Mostra as digitais
 #API.stop_candles_stream(parEur, 60)
 
 #Puxar histórico de entradas feitas
-status,historico = API.get_position_history_v2('DIGITAL', 10, 0, 0, 0) #Alternar para "turbo-option" caso queira exibir binária
+status,historico = API.get_position_history_v2('digital-option', 10, 0, 0, 0) #Alternar para "turbo-option" caso queira exibir binária
 
 #Algumas sugestões do que se pode pegar
 '''
@@ -94,10 +94,10 @@ Valor: buy_amount
 '''
 print('\n')
 #Exibir histórico de entradas e seu resultado
-#for x in historico['positions']: #Para exibir os dados desejados
-    #print('PAR: ' +str(x['raw_event']['instrument_underlying']) + ' / ' + 'DIRECAO: ' +str(x['raw_event']['instrument_dir']) + ' / VALOR: ' +str(x['invest']))
-   # print('RESULTADO: ' +str(x['close_profit']- x['invest'] if x['close_profit'] == 0 else round(x['close_profit'] - x['invest'], 2)) + ' | INICIO OP: ' +str(timestamp_converter(x['open_time'] / 1000)) + ' / FIM OP: ' + str(timestamp_converter(x['close_time'] / 1000)))
-    #print(' \n')
+for x in historico['positions']: #Para exibir os dados desejados
+    print('PAR: ' +str(x['raw_event']['instrument_underlying']) + ' / ' + 'DIRECAO: ' +str(x['raw_event']['instrument_dir']) + ' / VALOR: ' +str(x['invest']))
+    print('RESULTADO: ' +str(x['close_profit']- x['invest'] if x['close_profit'] == 0 else round(x['close_profit'] - x['invest'], 2)) + ' | INICIO OP: ' +str(timestamp_converter(x['open_time'] / 1000)) + ' / FIM OP: ' + str(timestamp_converter(x['close_time'] / 1000)))
+    print(' \n')
 
 par = 'EURUSD-OTC'
 entrada = 2
